@@ -1,0 +1,18 @@
+{
+  "files.associations": {
+    "*.php": "php",
+    "xlocale": "c",
+    "system_error": "c",
+    "type_traits": "c",
+    "xlocnum": "c",
+    "xtr1common": "c",
+    "stdio.h": "c",
+    "tuple": "c",
+    "utility": "c",
+    "stat.h": "c",
+    "atomic": "c",
+    "memory": "c"
+  },
+  "cmake.configureOnOpen": true,
+  "C_Cpp.errorSquiggles": "Disabled"
+}

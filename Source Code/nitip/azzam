@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+void susun_angka(int array[] , int size){
+	int i,j,temp,min;
+	for(i=0 ; i<size ; i++){
+		min = i;
+		for(j=i+1 ; j<size ; j++){
+			if(array[j]<array[min]){
+				temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+			}
+		}
+	}
+}
+
+int main(){
+	int i, n;
+    printf("===========================\n");
+	printf("  MENGURUTKAN ANGKA ACAK  \n");
+	printf("===========================\n");
+	printf("\nMasukkan banyaknya angka yang ingin kamu urutkan!\n");
+	printf("=> ");
+	scanf("%d",&n);
+	int array[n];
+
+	printf("\nMasukkan %d angka tersebut!\n(Tolong gunakan spasi atau enter untuk pemisah dengan angka selanjutnya)\n", n);
+	printf("=> ");
+	for(i=0 ; i<n ; i++){
+		scanf("%d",&array[i]);
+	}
+
+	susun_angka(array,n);
+
+    printf("\nAngka sudah diurutkan dari yang terkecil ke yang terbesar!\n");
+	printf("\nUrutan Angka :\n");
+	for(i=0 ; i<n ; i++){
+		printf("%d ",array[i]);
+	}
+
+	printf("\n");
+}
