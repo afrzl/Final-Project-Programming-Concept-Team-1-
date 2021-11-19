@@ -25,7 +25,6 @@ typedef PlayMusic *PlayMusicPtr;
 
 unsigned int dataChoice(void);
 int listMusic(), addMusic(), enqueue(const unsigned int play), isEmpty(PlayMusicPtr headPtr), playlist(PlayMusicPtr currentPtr), loadMusic(), saveMusic();
-// int addMusic(), isEmpty(DataMusicPtr headPtr), enqueue(DataMusicPtr *headPtr, DataMusicPtr *tailPtr, char *name, char *singer, unsigned int genre), listMusic(DataMusicPtr currentPtr);
 
 DataMusic data_music[100];
 
@@ -179,8 +178,14 @@ int listMusic()
     return 0;
 }
 
+int listGenre()
+{
+    
+}
+
 int playlist(PlayMusicPtr currentPtr)
 {
+    printf("\n========================================================================================================================\n");
     unsigned int choice;
     if (currentPtr == NULL)
     {
