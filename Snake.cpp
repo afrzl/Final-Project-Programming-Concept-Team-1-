@@ -50,7 +50,7 @@ void moveSnake()
         bagian_snake++;
         score += 5;
         getFood();
-        if (score % 20 == 0)
+        if (score % 500 == 0)
         {
             jalan = 0;
             bagian_snake = 2;
