@@ -4,9 +4,9 @@
 
 using namespace sf;
 
-int Snake();
+int GameSnake();
 void collisionCheck(RenderWindow* window);
-void borderCheck(RenderWindow* window);
+void borderCheck();
 void gameOver();
 void arahKeyboard();
 void moveSnake();

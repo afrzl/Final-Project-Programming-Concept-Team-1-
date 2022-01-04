@@ -7,22 +7,7 @@ using namespace sf;
 int hit_enter;
 class LevelUp
 {
-
 public:
-	LevelUp(float width, float height);
-
-	void draw(sf::RenderWindow& window);
-
-	int mainMenuPressed()
-	{
-		return menuNextLevel;
-	}
-
 	~LevelUp();
-private:
-	int menuNextLevel;
-	sf::Font font;
-	sf::Text menuLevel;
-
 };
 

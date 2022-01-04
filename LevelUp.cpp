@@ -3,10 +3,8 @@
 int NextLevel()
 {
     RenderWindow window(VideoMode(720, 720),    // UKURAN WINDOW
-        " Snake Game! ",           // NAMA WINDOW AWAL
+        " Snake Madness! ",           // NAMA WINDOW AWAL
         sf::Style::Close);
-
-    LevelUp menu(720, 720);   // UKURAN PREPOSISI TEKS DI WINDOW AWAL
 
     while (true) {
         while (window.isOpen())
@@ -20,29 +18,19 @@ int NextLevel()
 
                 if (evnt.type == Event::KeyReleased)
                 {
-                    if (evnt.key.code == Keyboard::Enter)
-                    {
-                        window.close();
-                        hit_enter = 1;
-                    }
+                    window.close();
+                    hit_enter = 1;
                 }
-
-
             }
 
             // KODINGAN LOGO MENU, LOGO LETAKNYA DIATAS PILIHAN BERMAIN
-            Texture logo;
-            logo.loadFromFile(" XXXXXXXXX "); // LETAK LOGO MENU
+            Texture textBackground;
+            textBackground.loadFromFile("images/levelup.jpg");
 
-            Sprite sp(logo);
+            Sprite spriteBackground(textBackground);
 
-            sp.setScale(.4f, .2f); // UKURAN LOGO DI MENU
-
-            window.clear(sf::Color::Blue); //Background dari MENU nya
-            menu.draw(window);
-            window.draw(sp);
+            window.draw(spriteBackground);
             window.display();
-
         }
 
         if (hit_enter == 1)
@@ -53,26 +41,7 @@ int NextLevel()
     return 0;
 }
 
-LevelUp::LevelUp(float width, float height)
-{
-
-    if (!font.loadFromFile("fonts/GothicA1-Medium.ttf")) {} //FONT MENU LUR...
-
-    menuLevel.setFont(font);
-    menuLevel.setFillColor(sf::Color::Green);
-    menuLevel.setString("LEVEL UP!");
-    menuLevel.setCharacterSize(40);
-    menuLevel.setPosition(sf::Vector2f(width / 2 - 50, height / 2 - 50));
-}
-
-
 LevelUp::~LevelUp()
 {
 
-}
-
-// Draw Main Menu
-void LevelUp::draw(sf::RenderWindow& window)
-{
-    window.draw(menuLevel);
 }

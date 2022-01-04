@@ -1,14 +1,14 @@
 #include "Main.h"
 
-int Snake();
+int GameSnake();
 
 int main()
 {
-    RenderWindow window(VideoMode(720, 720),    // UKURAN WINDOW
-        " Snake Game! ",           // NAMA WINDOW AWAL
+    RenderWindow window(VideoMode(720, 720),
+        " Snake Madness! ",
         sf::Style::Close);
 
-    Menuu menu(150, 400);   // UKURAN PREPOSISI TEKS DI WINDOW AWAL
+    Menuu menu(720, 480);
 
     while (true) {
         while (window.isOpen())
@@ -18,6 +18,7 @@ int main()
             {
                 if (evnt.type == Event::Closed)
                     window.close();
+                    page_number = 2;
 
                 if (evnt.type == Event::KeyReleased)
                 {
@@ -53,40 +54,78 @@ int main()
                         }
                     }
                 }
-
-
             }
 
-            // KODINGAN LOGO MENU, LOGO LETAKNYA DIATAS PILIHAN BERMAIN
-            Texture logo;
-            logo.loadFromFile(" XXXXXXXXX "); // LETAK LOGO MENU
+            Texture textBackground;
+            textBackground.loadFromFile("images/mainmenu.png");
 
-            Sprite sp(logo);
 
-            sp.setScale(.4f, .2f); // UKURAN LOGO DI MENU
+            Sprite spriteBackground(textBackground);
 
-            window.clear(sf::Color::Blue); //Background dari MENU nya
+            window.draw(spriteBackground);
             menu.draw(window);
-            window.draw(sp);
             window.display();
 
         }
+        
         if (page_number == 0)
         {
-            Snake();
+            GameSnake();
             break;
         }
         if (page_number == 1)
         {
-            // KODINGAN TENTANG GAME
-            printf("Tentang Game");
-            break;
+            tentang();
         }
         if (page_number == 2)
         {
-            // KODINGAN KELUAR GAME
             break;
         }
     }
+    return 0;
+}
+
+int tentang()
+{
+    RenderWindow window(VideoMode(720, 720),    // UKURAN WINDOW
+        " Snake Madness! ",           // NAMA WINDOW AWAL
+        sf::Style::Close);
+
+    while (true) {
+        while (window.isOpen())
+        {
+            Event evnt;
+            while (window.pollEvent(evnt))
+            {
+                if (evnt.type == Event::Closed)
+                    window.close();
+                page_number = 2;
+
+                if (evnt.type == Event::KeyReleased)
+                {
+                    if (evnt.key.code == Keyboard::Enter)
+                    {
+                        window.close();
+                        page_number = 0;
+                    }
+                }
+            }
+
+            // KODINGAN LOGO MENU, LOGO LETAKNYA DIATAS PILIHAN BERMAIN
+            Texture textTentang;
+            textTentang.loadFromFile("images/tentang.png"); // LETAK LOGO MENU
+            Sprite spriteTentang(textTentang);
+            window.draw(spriteTentang);
+            window.display();
+
+        }
+
+        if (page_number == 0)
+        {
+            main();
+            break;
+        }
+    }
+
     return 0;
 }

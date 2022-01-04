@@ -1,18 +1,12 @@
 #include "Snake.h"
 
-using namespace sf;
-
 const int jumlah_kotak = 30;
 const int size_kotak = 24;
 const int width = 720;
 const int height = 720;
 
-int level = 1;
-int arah_snake = 0; //Awalan, arah ular, 0,1,2,3.
-int last_arah_snake = arah_snake;
-int bagian_snake = 2; //Jumlah bagian snake diawal game.
-int life_snake = 1; //Jumlah maksimal gigit badan.
-int jalan = 0;
+float delay = 0.1;
+int level, arah_snake, last_arah_snake, bagian_snake, life_snake, jalan, score, end;
 
 struct Snake
 {
@@ -25,6 +19,7 @@ struct Fruit
 } fruit;
 
 int NextLevel();
+int Over();
 
 void getFood()
 {
@@ -53,10 +48,13 @@ void moveSnake()
     if ((snake[0].x == fruit.x) && (snake[0].y == fruit.y))
     {
         bagian_snake++;
+        score += 5;
         getFood();
-        if (bagian_snake % 5 == 0)
+        if (score % 500 == 0)
         {
             jalan = 0;
+            bagian_snake = 2;
+            delay = delay * 95 / 100;
             NextLevel();
             level++;
         }
@@ -92,25 +90,33 @@ void arahKeyboard()
 
 void gameOver()
 {
-    printf("Game Selesai!");
+    fruit.x = 10;
+    fruit.y = 10;
+    snake[0].x = 10;
+    snake[0].y = 5;
+    life_snake = 1;
+
+    jalan = 0;
+    bagian_snake = 2;
+    arah_snake = 0;
+    last_arah_snake = arah_snake;
+    level = 1;
+    score = 0;
+    end = 0;
 }
 
-void borderCheck(RenderWindow* window) {
+void borderCheck() {
     if ((snake[0].x == (jumlah_kotak - 1)) && arah_snake == 2) {
-        window->close();
-        gameOver();
+        end = 1;
     }
     if ((snake[0].y == 3) && arah_snake == 3) {
-        window->close();
-        gameOver();
+        end = 1;
     }
     if ((snake[0].y == (jumlah_kotak - 1)) && arah_snake == 0) {
-        window->close();
-        gameOver();
+        end = 1;
     }
     if ((snake[0].x == 0) && arah_snake == 1) {
-        window->close();
-        gameOver();
+        end = 1;
     }
 }
 
@@ -119,10 +125,6 @@ void collisionCheck(RenderWindow* window) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
             bagian_snake = i;
             life_snake--;
-            if (life_snake == 0) {
-                window->close();
-                gameOver();
-            }
         }
     }
 }
@@ -131,9 +133,10 @@ Snakee::~Snakee()
 {
 
 }
-int Snake()
+
+int GameSnake()
 {
-    RenderWindow window(VideoMode(width, height), "Snake Game!");
+    RenderWindow window(VideoMode(width, height), "Snake Madness!");
     window.setFramerateLimit(60);
     srand(time(0));
 
@@ -147,24 +150,13 @@ int Snake()
     textfruit.loadFromFile("images/fruit.png");
     textgate.loadFromFile("images/gate.png");
 
-    Sprite spriteBackground(textbackground);
-    Sprite spriteheadUp(textheadUp);
-    Sprite spriteheadDown(textheadDown);
-    Sprite spriteheadLeft(textheadLeft);
-    Sprite spriteheadRight(textheadRight);
-    Sprite spritebody(textbody);
-    Sprite spritefruit(textfruit);
-    Sprite spritegate(textgate);
+    Sprite spriteBackground(textbackground), spriteheadUp(textheadUp), spriteheadDown(textheadDown), spriteheadLeft(textheadLeft), spriteheadRight(textheadRight), spritebody(textbody), spritefruit(textfruit), spritegate(textgate);
 
-    float delay = 0.1;
     float timer = 0;
     float time;
     Clock clock;
 
-    fruit.x = 10;
-    fruit.y = 10;
-    snake[0].x = 10;
-    snake[0].y = 5;
+    gameOver();
     moveSnake();
 
     Font font;
@@ -191,8 +183,14 @@ int Snake()
             if (jalan != 0)
             {
                 moveSnake();
-                borderCheck(&window);
+                borderCheck();
                 collisionCheck(&window);
+                if(end == 1 || life_snake == 0)
+                {
+                    window.close();
+                    Over();
+                    return 0;
+                };
 
                 timer = 0;
                 last_arah_snake = arah_snake;
@@ -200,7 +198,6 @@ int Snake()
         }
 
         window.clear();
-
         window.draw(spriteBackground);
 
         for (int i = 0; i < jumlah_kotak; i++)
@@ -255,11 +252,11 @@ int Snake()
 
         Text text;
 
-        std::string score = "Score : " + std::to_string(bagian_snake * 5);
+        std::string stringScore = "Score : " + std::to_string(score);
         text.setPosition(3 * size_kotak, 1 * size_kotak);
         text.setFont(font);
         text.setCharacterSize(24);
-        text.setString(score);
+        text.setString(stringScore);
         window.draw(text);
 
         std::string stringLevel = "Level : " + std::to_string(level);

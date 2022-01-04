@@ -3,25 +3,25 @@
 Menuu::Menuu(float width, float height)
 {
 
-	if (!font.loadFromFile("fonts/GothicA1-Medium.ttf")) {} //FONT MENU LUR...
+	if (!font.loadFromFile("fonts/broadway.ttf")) {}
 
 	mainMenu[0].setFont(font);
 	mainMenu[0].setFillColor(sf::Color::Green);
 	mainMenu[0].setString("Bermain");
 	mainMenu[0].setCharacterSize(40);
-	mainMenu[0].setPosition(sf::Vector2f(width / 2 - 50, height / (Max_main_menu + 1)));
+	mainMenu[0].setPosition(sf::Vector2f(width / 2 - 100, 325));
 
 	mainMenu[1].setFont(font);
 	mainMenu[1].setFillColor(sf::Color::White);
 	mainMenu[1].setString("Tentang");
 	mainMenu[1].setCharacterSize(40);
-	mainMenu[1].setPosition(sf::Vector2f(width / 2 - 50, height / (Max_main_menu + 1) * 2));
+	mainMenu[1].setPosition(sf::Vector2f(width / 2 - 100, 460));
 
 	mainMenu[2].setFont(font);
 	mainMenu[2].setFillColor(sf::Color::White);
 	mainMenu[2].setString("Keluar");
 	mainMenu[2].setCharacterSize(40);
-	mainMenu[2].setPosition(sf::Vector2f(width / 2 - 50, height / (Max_main_menu + 1) * 3));
+	mainMenu[2].setPosition(sf::Vector2f(width / 2 - 100, 585));
 
 	mainMenuSelected = 0;
 }
