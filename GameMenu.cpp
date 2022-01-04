@@ -32,7 +32,6 @@ Menuu::~Menuu()
 
 }
 
-// Draw Main Menu
 void Menuu::draw(sf::RenderWindow& window)
 {
 	for (int i = 0; i < 3; i++)
@@ -41,7 +40,6 @@ void Menuu::draw(sf::RenderWindow& window)
 	}
 }
 
-// PILIHAN KEATAS
 void Menuu::moveUp()
 {
 	if (mainMenuSelected - 1 >= -1)
@@ -57,8 +55,6 @@ void Menuu::moveUp()
 	}
 }
 
-
-// PILIHAN KEBAWAH
 void Menuu::moveDown()
 {
 	if (mainMenuSelected + 1 <= Max_main_menu)

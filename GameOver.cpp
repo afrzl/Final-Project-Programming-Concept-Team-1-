@@ -5,8 +5,8 @@ int GameSnake();
 
 int Over()
 {
-    RenderWindow window(VideoMode(720, 720),    // UKURAN WINDOW
-        " Snake Madness! ",           // NAMA WINDOW AWAL
+    RenderWindow window(VideoMode(720, 720),
+        " Snake Madness! ",
         sf::Style::Close);
 
     while (true) {
@@ -28,13 +28,11 @@ int Over()
                 }
             }
 
-            // KODINGAN LOGO MENU, LOGO LETAKNYA DIATAS PILIHAN BERMAIN
             Texture textbackground;
-            textbackground.loadFromFile("images/gameover.jpg"); // LETAK LOGO MENU
+            textbackground.loadFromFile("images/gameover.jpg");
 
             Sprite spriteBackground(textbackground);
 
-            window.clear(sf::Color::Black); //Background dari MENU nya
             window.draw(spriteBackground);
             window.display();
 

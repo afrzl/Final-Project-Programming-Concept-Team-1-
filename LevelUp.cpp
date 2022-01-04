@@ -2,8 +2,8 @@
 
 int NextLevel()
 {
-    RenderWindow window(VideoMode(720, 720),    // UKURAN WINDOW
-        " Snake Madness! ",           // NAMA WINDOW AWAL
+    RenderWindow window(VideoMode(720, 720),
+        " Snake Madness! ",
         sf::Style::Close);
 
     while (true) {
@@ -23,7 +23,6 @@ int NextLevel()
                 }
             }
 
-            // KODINGAN LOGO MENU, LOGO LETAKNYA DIATAS PILIHAN BERMAIN
             Texture textBackground;
             textBackground.loadFromFile("images/levelup.jpg");
 
